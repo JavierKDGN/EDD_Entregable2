@@ -19,4 +19,23 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="universities_followers.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dataset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="read_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_abierto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_cerrado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

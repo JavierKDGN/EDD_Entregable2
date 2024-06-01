@@ -1,1 +1,11 @@
 #pragma once
+
+#include <string>
+
+struct UserInfo {
+	std::string university;
+	size_t number_tweets;
+	size_t friends_count;
+	size_t followers_count;
+	std::string created_at;
+};
