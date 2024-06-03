@@ -3,11 +3,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
-size_t hash_id(const std::string &id, size_t size);
+const int CONSTANTE_PRIMO = 37;
 
-size_t hash_user(const std::string &user, size_t size);
+//Acumulacion polinomial
+size_t hash1(const std::string& id, size_t table_size) {
+	size_t hash_val = 0;
+	size_t i = 0;
 
-size_t hash_id2(const std::string &id, size_t size);
+	for (char c : id) {
+		hash_val += c * pow(CONSTANTE_PRIMO, i);
+	}
 
-size_t hash_user2(const std::string &user, size_t size);
+	return hash_val;
+}
+
+//Hash de cadena
+size_t hash2(const std::string& user, size_t table_size) {
+	size_t hash_val = 0;
+	for (char c : user) {
+		hash_val = CONSTANTE_PRIMO * hash_val + c;
+	}
+	return hash_val % table_size;
+}
