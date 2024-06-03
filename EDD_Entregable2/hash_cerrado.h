@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "dataset.h"
+#include "UserInfo.h"
 
 //Implementacion de lista ligada para la tabla hash cerrada, usando booleano para ver si esta la casilla ocupada
 struct NodoHash {

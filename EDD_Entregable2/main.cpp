@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "read_data.h"
+
 int main(void) {
-	std::cout << "Hello world" << std::endl;
+	load_data("universities_followers.csv");
 }
