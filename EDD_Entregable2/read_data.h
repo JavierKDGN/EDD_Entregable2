@@ -12,11 +12,11 @@
 #include "hash_std.h"
 
 void load_data(const std::string& filename,
-	HashAbierto& hash_abierto /*,
+	HashAbierto& hash_abierto, /*
 	HashCerradoLinear& hash_linear,
 	HashCerradoCuadratico& hash_cuadratico,
-	HashCerradoDoble& hash_doble,
-	HashSTD& hash_std*/) {
+	HashCerradoDoble& hash_doble*/
+	HashSTD& hash_std) {
 
 	std::ifstream file(filename);
 	std::vector<std::string> filas;
@@ -53,7 +53,8 @@ void load_data(const std::string& filename,
 		UserInfo usuario = { university, user_id, user_name, number_tweets, friends_count, followers_count, created_at };
 
 		//Insertar en tablas hash: POR HACER
-		hash_abierto.insert(user_name, usuario);
+		hash_abierto.insert(user_id, user_name, usuario);
+		hash_std.insert(user_id, user_name, usuario);
 	}
 
 }
