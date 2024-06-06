@@ -16,6 +16,7 @@ struct NodoHash {
 		this->key = key;
 		this->value = value;
 		this->deleted = false;
+        this->next = nullptr;
 	}
 };
 
@@ -125,6 +126,7 @@ public:
             actual = actual->next;
         }
         return false;
+
     }
     bool EliminarConID(const std::string& id) {
         size_t index = hashID(id);
@@ -149,6 +151,70 @@ public:
 };
 
 class HashCerradoCuadratico {
+private:
+	size_t elem;
+	//Vector de punteros a nodos, que representan una posicion en la tabla hash 
+	std::vector<NodoHash*> username_table;
+	std::vector<NodoHash*> id_table;
+
+	size_t username_table_size;
+	size_t id_table_size;
+
+	//Capacidad maxima de la tabla hash
+	size_t capacity;
+	size_t hash_Username(const std::string& username, size_t tabla_size ) const {
+        return hash2(username, username_table_size);
+    }
+
+    size_t hash_ID(const std::string& id, size_t tabla_size ) const {
+        return hash1(id, id_table_size);
+    }
+public:
+    HashCerradoCuadratico(size_t cap): capacity(cap), username_table_size(cap), id_table_size(cap) {
+        username_table.resize(username_table_size, nullptr);
+        id_table.resize(id_table_size, nullptr);
+    }
+    bool insertar(const std::string& username, const std::string& id, const UserInfo& value) {
+        size_t index = hash_Username(username, username_table_size), i;//se revisa e inserta la fase de user de la tabla
+        for(i = 0; username_table[index]!= nullptr && i < username_table_size; i++){
+            index = (index + i * i)%(username_table_size);
+        }
+        if(i >= username_table_size){//si se llena
+            return false;
+        }
+        username_table[index]= new NodoHash(username, value);
+        index = hash_ID(id, id_table_size);//se revisa e inserta la fase de id de la tabla
+        for(i = 0; id_table[index]!= nullptr && i < id_table_size; i++){
+            index = (index + i * i)%(id_table_size);
+        }
+        if(i >= id_table_size){// si se llena
+            return false;
+        }
+        id_table[index]= new NodoHash(id, value);
+        return true;
+    }
+    UserInfo* BuscaConUser(const std::string& username){
+        size_t index = hash_Username(username, username_table_size), i = 0;
+        while(username_table[index] != nullptr && i < username_table_size){
+            if(username_table[index]->key == username){
+                return &username_table[index]->value;
+            }
+            index = (index + i * i) % (username_table_size);
+            i++;
+        }
+        return nullptr;
+    }
+    UserInfo* BuscaConID(const std::string& id){
+        size_t index = hash_Username(id, id_table_size), i = 0;
+        while(id_table[index] != nullptr && i < id_table_size){
+            if(id_table[index]->key == id){
+                return &id_table[index]->value;
+            }
+            index = (index + i * i) % (id_table_size);
+            i++;
+        }
+        return nullptr;
+    }
 
 };
 
