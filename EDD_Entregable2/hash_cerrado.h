@@ -89,9 +89,9 @@ public:
         NodoHash* actual = username_table[index];
         while (actual) {
             if (actual->key == username) {
-                return &actual->value;
+                return &actual->value;// retorna el username de tipo UserInfo si lo encuentra
             }
-            actual = actual->next;
+            actual = actual->next;//hace el cambio
         }
         return nullptr;
     }
@@ -100,7 +100,7 @@ public:
         NodoHash* actual = id_table[index];
         while (actual) {
             if (actual->key == id && !actual->deleted) {
-                return &actual->value;
+                return &actual->value;// retorna el id de tipo UserInfo si lo encuentra
             }
             actual = actual->next;
         }
@@ -112,7 +112,7 @@ public:
         NodoHash* prev = nullptr;
         while (actual) {
             if (actual->key == username && !actual->deleted) {
-                actual->deleted = true;
+                actual->deleted = true;//marca el nodo como eliminado
                 if (prev) {
                     prev->next = actual->next;
                 } else {
@@ -132,7 +132,7 @@ public:
         NodoHash* prev = nullptr;
         while (actual) {
             if (actual->key == id && !actual->deleted) {
-                actual->deleted = true;
+                actual->deleted = true;//marca el nodo como eliminado
                 if (prev) {
                     prev->next = actual->next;
                 } else {
