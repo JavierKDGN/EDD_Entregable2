@@ -23,13 +23,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashCerradoCuadratico.h" />
+    <ClInclude Include="HashCerradoDoble.h" />
     <ClInclude Include="HashCerradoLinear.h" />
-    <ClInclude Include="hash_std.h" />
+    <ClInclude Include="HashSTD.h" />
     <ClInclude Include="UserInfo.h" />
     <ClInclude Include="funciones_hash.h" />
     <ClInclude Include="HashAbierto.h" />
-    <ClInclude Include="hash_cerrado.h" />
-    <ClInclude Include="read_data.h" />
+    <ClInclude Include="load_data.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="universities_followers.csv" />

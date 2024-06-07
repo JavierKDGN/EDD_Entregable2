@@ -29,3 +29,12 @@ size_t hash_username(const std::string& user, size_t table_size) {
 	}
 	return hash_val % table_size;
 }
+
+//Hash de ASCII para double hash
+size_t hash2(const std::string& key, size_t table_size) {
+	size_t hash_val = 0;
+	for (char c : key) {
+		hash_val += c;
+	}
+	return (hash_val % (table_size - 1)) + 1;
+}

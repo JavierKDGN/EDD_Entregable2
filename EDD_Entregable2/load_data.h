@@ -10,13 +10,14 @@
 #include "HashAbierto.h"
 #include "HashCerradoLinear.h"
 #include "HashCerradoCuadratico.h"
-#include "hash_std.h"
+#include "HashCerradoDoble.h"
+#include "HashStd.h"
 
 void load_data(const std::string& filename,
 	HashAbierto& hash_abierto,
 	HashCerradoLinear& hash_linear,
 	HashCerradoCuadratico& hash_cuadratico,
-	//HashCerradoDoble& hash_doble*/
+	HashCerradoDoble& hash_doble,
 	HashSTD& hash_std) {
 
 	std::ifstream file(filename);
@@ -57,6 +58,7 @@ void load_data(const std::string& filename,
 		hash_abierto.insert(usuario);
 		hash_linear.insert(usuario);
 		hash_cuadratico.insert(usuario);
+		hash_doble.insert(usuario);
 		hash_std.insert(user_id, user_name, usuario);
 	}
 
