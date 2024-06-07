@@ -16,8 +16,10 @@ int main(void) {
 	HashSTD TablasSTD;
 	load_data("universities_followers.csv", TablasAbiertas, TablasLinear, TablasCuadratico,TablasSTD);
 	
-	TablasAbiertas.get_from_username("BerriosCavieres")->print();
-	TablasAbiertas.remove_from_username("BerriosCavieres");
-	TablasAbiertas.get_from_username("BerriosCavieres")->print();
+	TablasCuadratico.get_from_username("BerriosCavieres")->print();
+	TablasCuadratico.remove_from_username("BerriosCavieres");
+	TablasCuadratico.get_from_username("BerriosCavieres")->print();
+
+
 
 }
