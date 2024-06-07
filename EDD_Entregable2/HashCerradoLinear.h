@@ -46,6 +46,39 @@ private:
 		}
 	}
 
+	UserInfo *_get(HashMap& hash_map, const std::string& key, size_t index) {
+		size_t i = index;
+		size_t start_index = index;
+		//Para datos repetidos, si se quiere encontrar una clave repetida se revisa hasta que es encontrada despues de 1 vuelta
+		do {
+			if (hash_map.tabla[i] != nullptr) {
+				if (hash_map.tabla[i]->user_id == key || hash_map.tabla[i]->user_name == key) {
+					return hash_map.tabla[i];
+				}
+			}
+			i = (i + 1) % capacity;
+		} while (i != start_index);
+		
+	}
+
+	void _remove(HashMap& hash_map, const std::string& key, size_t index) {
+		size_t i = index;
+		size_t start_index = index;
+		//Para datos repetidos, si se quiere encontrar una clave repetida se revisa hasta que es encontrada despues de 1 vuelta
+		do {
+			if (hash_map.tabla[i] != nullptr) {
+				if (hash_map.tabla[i]->user_id == key || hash_map.tabla[i]->user_name == key) {
+					delete hash_map.tabla[i];
+					hash_map.tabla[i] = nullptr;
+					hash_map.size--;
+					return;
+				}
+			}
+			i = (i + 1) % capacity;
+		} while (i != start_index);
+
+	}
+
 public:
 	HashCerradoLinear(size_t capacity) {
 		this->username_table = new HashMap(capacity);
@@ -63,53 +96,21 @@ public:
 
 	UserInfo *get_from_id(const std::string& user_id) {
 		size_t index = hash_id(user_id, capacity);
-		size_t i = index;
-		while (id_table->tabla[i] != nullptr) {
-			if (id_table->tabla[i]->user_id == user_id) {
-				return id_table->tabla[i];
-			}
-			i = (i + 1) % capacity;
-		}
-		return nullptr;
+		return _get(*id_table, user_id, index);
 	}
 
 	UserInfo *get_from_username(const std::string& username) {
 		size_t index = hash_username(username, capacity);
-		size_t i = index;
-		while (username_table->tabla[i] != nullptr) {
-			if (username_table->tabla[i]->user_name == username) {
-				return username_table->tabla[i];
-			}
-			i = (i + 1) % capacity;
-		}
-		return nullptr;
+		return _get(*username_table, username, index);
 	}
 
 	void remove_from_id(const std::string& user_id) {
 		size_t index = hash_id(user_id, capacity);
-		size_t i = index;
-		while (id_table->tabla[i] != nullptr) {
-			if (id_table->tabla[i]->user_id == user_id) {
-				delete id_table->tabla[i];
-				id_table->tabla[i] = nullptr;
-				id_table->size--;
-				break;
-			}
-			i = (i + 1) % capacity;
-		}
+		_remove(*id_table, user_id, index);
 	}
 
 	void remove_from_username(const std::string& username) {
 		size_t index = hash_username(username, capacity);
-		size_t i = index;
-		while (username_table->tabla[i] != nullptr) {
-			if (username_table->tabla[i]->user_name == username) {
-				delete username_table->tabla[i];
-				username_table->tabla[i] = nullptr;
-				username_table->size--;
-				break;
-			}
-			i = (i + 1) % capacity;
-		}
+		_remove(*username_table, username, index);
 	}
 };
