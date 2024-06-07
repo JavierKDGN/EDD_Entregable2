@@ -6,6 +6,8 @@
 #include "funciones_hash.h"
 
 
+//Referencia : https://www.geeksforgeeks.org/implementation-of-hash-table-in-c-using-separate-chaining/
+
 class HashAbierto {
 private:
 	//Implementacion de lista ligada para la tabla hash
@@ -35,12 +37,13 @@ private:
 	
 
 private:
+	//O(n)
 	void insert_username(const std::string& key, const UserInfo& value) {
 		//Obtener el indice de la tabla hash
 		size_t index;
 		
-		index = hash2(key, capacity);
-		
+		index = hash_username(key, capacity);
+
 		//Crear un nuevo nodo
 		Nodo* new_node = new Nodo(key, value);
 
@@ -50,6 +53,7 @@ private:
 		}
 		else {
 			//Si la posicion en la tabla hash no esta vacia, insertar el nodo al final de la lista ligada
+			//O(n)
 			Nodo* current = username_table[index];
 			while (current->next != nullptr) {
 				current = current->next;
@@ -61,10 +65,11 @@ private:
 		username_table_size++;
 	}
 
+	//O(n)
 	void insert_id(const std::string& key, const UserInfo& value) {
 		//Obtener el indice de la tabla hash
 		size_t index;
-		index = hash1(key, capacity);
+		index = hash_id(key, capacity);
 
 		//Crear un nuevo nodo
 		Nodo* new_node = new Nodo(key, value);
@@ -98,17 +103,19 @@ public:
 
 	}
 
+	//O(n)
 	void insert(const std::string& key_id, const std::string& key_username, const UserInfo& value) {
 		insert_id(key_id, value);
 		insert_username(key_username, value);
 
 	}
 
-	//Buscar un elemento en la tabla hash, key es la clave
+	//Buscar un elemento en la tabla hash
+	//O(n)
 	UserInfo get_from_username(const std::string& key) {
 		//Obtener el indice de la tabla hash
 		size_t index;
-		index = hash2(key, capacity);
+		index = hash_username(key, capacity);
 
 		Nodo* current = username_table[index];
 		while (current != nullptr) {
@@ -122,10 +129,11 @@ public:
 		throw std::runtime_error("Error: key not found");
 	}
 
+	//O(n)
 	UserInfo get_from_id(const std::string& key) {
 		//Obtener el indice de la tabla hash
 		size_t index;
-		index = hash1(key, capacity);
+		index = hash_id(key, capacity);
 
 		Nodo* current = id_table[index];
 		while (current != nullptr) {
@@ -139,10 +147,11 @@ public:
 		throw std::runtime_error("Error: key not found");
 	}
 
+	//O(n)
 	void remove_from_username(const std::string& key) {
 		//Obtener el indice de la tabla hash
 		size_t index;
-		index = hash2(key, capacity);
+		index = hash_username(key, capacity);
 
 		//Buscar el nodo en la lista ligada
 		Nodo* current = username_table[index];
@@ -173,11 +182,12 @@ public:
 		username_table_size--;
 	}
 
-	//Eliminar un elemento en la tabla hash, key es la clave
+	//Eliminar un elemento en la tabla hash
+	//O(n)
 	void remove_from_id(const std::string& key) {
 		//Obtener el indice de la tabla hash
 		size_t index;
-		index = hash1(key, capacity);
+		index = hash_id(key, capacity);
 
 		//Buscar el nodo en la lista ligada
 		Nodo* current = id_table[index];

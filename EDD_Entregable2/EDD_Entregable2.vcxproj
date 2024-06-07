@@ -22,10 +22,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HashCerradoLinear.h" />
     <ClInclude Include="hash_std.h" />
     <ClInclude Include="UserInfo.h" />
     <ClInclude Include="funciones_hash.h" />
-    <ClInclude Include="hash_abierto.h" />
+    <ClInclude Include="HashAbierto.h" />
     <ClInclude Include="hash_cerrado.h" />
     <ClInclude Include="read_data.h" />
   </ItemGroup>
