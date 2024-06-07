@@ -22,6 +22,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HashCerradoCuadratico.h" />
     <ClInclude Include="HashCerradoLinear.h" />
     <ClInclude Include="hash_std.h" />
     <ClInclude Include="UserInfo.h" />
