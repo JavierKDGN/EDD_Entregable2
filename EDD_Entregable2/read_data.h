@@ -7,15 +7,15 @@
 #include <sstream>
 
 #include "UserInfo.h"
-#include "hash_abierto.h"
-#include "hash_cerrado.h"
+#include "HashAbierto.h"
+#include "HashCerradoLinear.h"
 #include "hash_std.h"
 
 void load_data(const std::string& filename,
-	HashAbierto& hash_abierto, /*
+	HashAbierto& hash_abierto,
 	HashCerradoLinear& hash_linear,
-	HashCerradoCuadratico& hash_cuadratico,
-	HashCerradoDoble& hash_doble*/
+	//HashCerradoCuadratico& hash_cuadratico,
+	//HashCerradoDoble& hash_doble*/
 	HashSTD& hash_std) {
 
 	std::ifstream file(filename);
@@ -54,6 +54,7 @@ void load_data(const std::string& filename,
 
 		//Insertar en tablas hash: POR HACER
 		hash_abierto.insert(user_id, user_name, usuario);
+		hash_linear.insert(usuario);
 		hash_std.insert(user_id, user_name, usuario);
 	}
 
